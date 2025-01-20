@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <!-- Updated logo source -->
+        <img src="https://res.cloudinary.com/jimshapedcoding/image/upload/v1597332609/android-icon-192x192_ove2a7.png" alt="Market Logo" class="img-fluid mb-4" style="max-width: 200px;">
+        
+        <h1 class="mt-4 text-primary" style="font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">Welcome to the Market</h1>
+        <p class="lead text-secondary mb-5">Buy and sell items with other users!</p>
+        
+        <div class="row mt-4">
+            {% if items %}
+                {% for item in items %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm hover-effect">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">{{ item.name }}</h5>
+                                <p class="card-text text-success fw-bold">Price: ${{ item.price }}</p>
+                                <a href="{{ url_for('market_page') }}" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                                    <i class="fas fa-shopping-cart me-2"></i>View Market
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <div class="p-5 bg-light rounded-3 shadow-sm">
+                        <p class="text-muted fs-5">No items available in the market yet.</p>
+                        <a href="{{ url_for('market_page') }}" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                            <i class="fas fa-store me-2"></i>Visit Market
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Add this style section at the bottom of the content block -->
+    <style>
+        .hover-effect {
+            transition: transform 0.2s ease-in-out;
+        }
+        .hover-effect:hover {
+            transform: translateY(-5px);
+        }
+        .card {
+            border-radius: 15px;
+            border: none;
+            background: linear-gradient(145deg, #ffffff, #f6f9fc);
+        }
+        .btn-primary {
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+    </style>
+{% endblock %}
